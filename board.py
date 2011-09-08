@@ -2,7 +2,7 @@
 
 class Board(object):
     def __init__(self):
-        self.board = [[]]*7
+        self.board = [[] for i in range(7)] 
 
     def __repr__(self):
         lines = []
@@ -15,7 +15,7 @@ class Board(object):
                     line += ' _'
             line += ' |'
             lines.append(line)
-        return '\n\n'.join(lines)
+        return '\n\n'.join(lines[::-1])
 
     def is_valid(self, col_num):
         if col_num < len(self.board) and col_num > -1:
@@ -28,6 +28,3 @@ class Board(object):
             self.board[col_num].append(symbol)
         else:
             raise ValueError("Invalid move!")
-
-            
-
