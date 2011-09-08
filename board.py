@@ -31,8 +31,6 @@ class Board(object):
         else:
             raise ValueError("Invalid move!")
 
-            
-
     def is_full(self):
         return all(
             len(self.board[col]) == self.height

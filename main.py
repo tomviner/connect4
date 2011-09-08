@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 from players import AI, Human
 from board import Board
 
@@ -10,6 +12,7 @@ def main():
     players = [p1, p2]
     current_player = 0
     while True:
+        os.system('clear')
         print board
         player = players[current_player]
         board.move(player.get_next_move(board), player.symbol)
