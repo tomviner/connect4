@@ -2,11 +2,13 @@
 
 class Board(object):
     def __init__(self):
-        self.board = [[] for i in range(7)] 
+        self.width = 7
+        self.height = 6
+        self.board = [[] for i in range(self.width]]
 
     def __repr__(self):
         lines = []
-        for row_num in range(6):
+        for row_num in range(self.height):
             line = '|'
             for col in self.board:
                 try:
@@ -28,3 +30,9 @@ class Board(object):
             self.board[col_num].append(symbol)
         else:
             raise ValueError("Invalid move!")
+
+    def is_full(self):
+        return all(
+            len(self.board[col]) == self.height
+            for col in range(self.width)
+        )
