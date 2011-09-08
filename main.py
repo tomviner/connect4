@@ -15,7 +15,14 @@ def main():
         os.system('clear')
         print board
         player = players[current_player]
-        board.move(player.get_next_move(board), player.symbol)
+        while True:
+            move = player.get_next_move(board)
+            try:
+                board.move(move, player.symbol)
+            except:
+                pass
+            else:
+                break
         current_player = (current_player + 1) % 2
 
 if __name__ == '__main__':
