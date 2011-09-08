@@ -10,21 +10,32 @@ class Board(object):
     def __init__(self):
         self.width = 7
         self.height = 6
-        self.board = [[] for i in range(self.width]]
+        self.board = [[] for i in range(self.width)]
 
     def __repr__(self):
         lines = []
+
+        lines.append('  ' + '- ' * self.width)
+
         for row_num in range(self.height):
             line = '|'
             for col in self.board:
                 line += ' ' + list_get(col, row_num, '_')
             line += ' |'
             lines.append(line)
-        return '\n\n'.join(lines[::-1])
+            lines.append('')
+
+        # header row of column numbers
+        line = '  '
+        for col in range(self.width):
+            line += str(col) + ' '
+        lines.append(line)
+
+        return '\n'.join(lines[::-1])
 
     def is_valid(self, col_num):
         if col_num < len(self.board) and col_num > -1:
-            if len(self.board[col_num]) < 7:
+            if len(self.board[col_num]) < self.height:
                 return True
         return False
 

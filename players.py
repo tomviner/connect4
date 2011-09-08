@@ -3,7 +3,8 @@ from random import choice
 
 class AI(object):
 
-    symbol = 'O'
+    def __init__(self, symbol):
+        self.symbol = symbol
 
     def get_next_move(self, board):
         valids = [col for col in range(7) if board.is_valid(col)]
@@ -11,8 +12,9 @@ class AI(object):
 
 
 class Human(object):
-    
-    symbol = 'X'
+
+    def __init__(self, symbol):
+        self.symbol = symbol
 
     def get_next_move(self, board):
         move = int(raw_input("Make a move (%s): " % self.symbol))
