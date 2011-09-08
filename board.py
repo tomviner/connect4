@@ -4,11 +4,11 @@ class Board(object):
     def __init__(self):
         self.width = 7
         self.height = 6
-        self.board = [[]] * self.width
-        
+        self.board = [[] for i in range(self.width]]
+
     def __repr__(self):
         lines = []
-        for row_num in range(6):
+        for row_num in range(self.height):
             line = '|'
             for col in self.board:
                 try:
@@ -17,7 +17,7 @@ class Board(object):
                     line += ' _'
             line += ' |'
             lines.append(line)
-        return '\n\n'.join(lines)
+        return '\n\n'.join(lines[::-1])
 
     def is_valid(self, col_num):
         if col_num < len(self.board) and col_num > -1:
@@ -36,4 +36,3 @@ class Board(object):
             len(self.board[col]) == self.height
             for col in range(self.width)
         )
-
