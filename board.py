@@ -45,7 +45,7 @@ class Board(object):
         else:
             raise ValueError("Invalid move!")
 
-    def connects(line, win=4, null_pieces=' '):
+    def connects(self, line, win=4, null_pieces=' '):
         run = 0
         token = ' '
         for piece in line:
@@ -60,7 +60,7 @@ class Board(object):
 
     def vert_win(self):
         for col in self.board:
-            winner = connects(col)
+            winner = self.connects(col)
             if winner:
                 return winner
         return None
@@ -68,7 +68,7 @@ class Board(object):
     def hori_win(self):
         for row_num in range(self.height):
             row = ''.join(list_get(col, row_num, ' ') for col in self.board)
-            winner = connects(row)
+            winner = self.connects(row)
             if winner:
                 return winner
         return None
