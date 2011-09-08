@@ -15,8 +15,6 @@ class Board(object):
     def __repr__(self):
         lines = []
 
-        lines.append('  ' + '- ' * self.width)
-
         for row_num in range(self.height):
             line = '|'
             for col in self.board:
