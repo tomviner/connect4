@@ -7,11 +7,11 @@ from board import Board
 
 def main():
     board = Board()
-    p1 = AI()
-    p2 = Human()
+    p1 = AI('O')
+    p2 = AI('X')
     players = [p1, p2]
     current_player = 0
-    while True:
+    while not board.is_full():
         os.system('clear')
         print board
         player = players[current_player]

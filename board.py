@@ -9,10 +9,7 @@ class Board(object):
     def __repr__(self):
         lines = []
 
-        print ' ',
-        for col in range(self.width):
-            print col,
-        print
+        lines.append('  ' + '- ' * self.width)
 
         for row_num in range(self.height):
             line = '|'
@@ -23,6 +20,13 @@ class Board(object):
                     line += ' _'
             line += ' |'
             lines.append(line)
+
+        # header row of column numbers
+        line = '  '
+        for col in range(self.width):
+            line += str(col) + ' '
+        lines.append(line)
+
         return '\n\n'.join(lines[::-1])
 
     def is_valid(self, col_num):
