@@ -11,7 +11,7 @@ def main():
     p2 = CleverAI('X')
     players = [p1, p2]
     current_player = 0
-    while not board.is_full():
+    while not board.is_full() or board.get_winner():
         os.system('clear')
         print board
         print
@@ -25,9 +25,15 @@ def main():
                 pass
         current_player = (current_player + 1) % 2
 
+    # display final state
     os.system('clear')
     print board
     print
+    winner = board.get_winner()
+    if winner:
+        print winner + ' wins!'
+    else:
+        print 'A draw!'
 
 if __name__ == '__main__':
     main()
