@@ -2,13 +2,13 @@
 
 import os
 
-from players import AI, Human
+from players import AI, Human, CleverAI
 from board import Board
 
 def main():
     board = Board()
-    p1 = AI('O')
-    p2 = AI('X')
+    p1 = Human('O')
+    p2 = CleverAI('X')
     players = [p1, p2]
     current_player = 0
     while not board.is_full():
@@ -19,14 +19,14 @@ def main():
             move = player.get_next_move(board)
             try:
                 board.move(move, player.symbol)
+                break
             except:
                 pass
-            else:
-                break
         current_player = (current_player + 1) % 2
 
     os.system('clear')
     print board
+    print
 
 if __name__ == '__main__':
     main()
