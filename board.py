@@ -20,6 +20,7 @@ class Board(object):
                     line += ' _'
             line += ' |'
             lines.append(line)
+            lines.append('')
 
         # header row of column numbers
         line = '  '
@@ -27,7 +28,7 @@ class Board(object):
             line += str(col) + ' '
         lines.append(line)
 
-        return '\n\n'.join(lines[::-1])
+        return '\n'.join(lines[::-1])
 
     def is_valid(self, col_num):
         if col_num < len(self.board) and col_num > -1:

@@ -25,6 +25,9 @@ def main():
                 break
         current_player = (current_player + 1) % 2
 
+    os.system('clear')
+    print board
+
 if __name__ == '__main__':
     main()
 
