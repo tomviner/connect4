@@ -74,6 +74,11 @@ class Board(object):
         return None
 
     def diag_win(self):
+        #for direction in [-1, 1]:
+        #    line = [list_get(col, col_num, ' ') for col, col_num in enumerate(self.board)]
+        #    winner = self.connects(row)
+        #    if winner:
+        #        return winner
         return None
 
     def get_winner(self):
