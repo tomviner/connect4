@@ -2,7 +2,7 @@
 
 import os
 
-from players import AI, Human, CleverAI
+from players import AI, Human, CleverAI, GeniusAI
 from board import Board
 
 def main():
@@ -14,6 +14,7 @@ def main():
     while not board.is_full():
         os.system('clear')
         print board
+        print
         player = players[current_player]
         while True:
             move = player.get_next_move(board)
