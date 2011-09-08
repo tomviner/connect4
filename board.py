@@ -4,10 +4,16 @@ class Board(object):
     def __init__(self):
         self.width = 7
         self.height = 6
-        self.board = [[] for i in range(self.width]]
+        self.board = [[] for i in range(self.width)]
 
     def __repr__(self):
         lines = []
+
+        print ' ',
+        for col in range(self.width):
+            print col,
+        print
+
         for row_num in range(self.height):
             line = '|'
             for col in self.board:
@@ -21,7 +27,7 @@ class Board(object):
 
     def is_valid(self, col_num):
         if col_num < len(self.board) and col_num > -1:
-            if len(self.board[col_num]) < 7:
+            if len(self.board[col_num]) < self.height:
                 return True
         return False
 
