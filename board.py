@@ -2,8 +2,10 @@
 
 class Board(object):
     def __init__(self):
-        self.board = [[]]*7
-
+        self.width = 7
+        self.height = 6
+        self.board = [[]] * self.width
+        
     def __repr__(self):
         lines = []
         for row_num in range(6):
@@ -17,4 +19,10 @@ class Board(object):
             lines.append(line)
         return '\n\n'.join(lines)
 
+
+    def is_full(self):
+        return all(
+            len(self.board[col]) == self.height
+            for col in range(self.width)
+        )
 
