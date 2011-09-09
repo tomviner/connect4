@@ -1,5 +1,7 @@
 
-def list_get(lst, index, default=None):
+def list_get(lst, index, default=None, default_upon_neg_index=True):
+    if index<0 and default_upon_neg_index:
+        return default
     try:
         return lst[index]
     except IndexError:
@@ -7,10 +9,11 @@ def list_get(lst, index, default=None):
 
 
 class Board(object):
-    def __init__(self):
+    def __init__(self, prepop_board=None):
         self.width = 7
         self.height = 6
-        self.board = [[] for i in range(self.width)]
+        self.must_connect = 4
+        self.board = prepop_board or [[] for i in range(self.width)]
 
     def __repr__(self):
         lines = []
@@ -43,13 +46,13 @@ class Board(object):
         else:
             raise ValueError("Invalid move!")
 
-    def connects(self, line, win=4, null_pieces=' '):
+    def connects(self, line, null_pieces=' '):
         run = 0
         token = ' '
         for piece in line:
             if piece == token[-1]:
                 run += 1
-                if run == 4 and piece not in null_pieces:
+                if run >= self.must_connect and piece not in null_pieces:
                     return piece
             else:
                 run = 1
@@ -72,11 +75,24 @@ class Board(object):
         return None
 
     def diag_win(self):
-        for direction in [-1, 1]:
-            line = [list_get(col_num, col, ' ') for col, col_num in enumerate(self.board)]
-            winner = self.connects(line)
-            if winner:
-                return winner
+        """
+        Iterate over each cell*, making a line all the way** up & right then again 
+        up & left via direction=-1. i
+        *Excluding a margin round 2 sides of the board where we'd be looking at lines shorter than self.must_connect
+        **We actually only check at far as the diagonal of the largest square on the board
+        """
+        max_diag = min(self.width, self.height)
+        for direction in (1, -1):
+            for col_num in range(self.width-self.must_connect+1):
+                for row_num in range(self.height-self.must_connect+1):
+                    line = [list_get(
+                                list_get(self.board[::direction], col_num+i, ' '), 
+                            row_num+i, ' ') 
+                        for i in range(max_diag)]
+                    print 'diag:', line
+                    winner = self.connects(line)
+                    if winner:
+                        return winner
         return None
 
     def get_winner(self):

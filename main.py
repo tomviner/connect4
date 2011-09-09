@@ -5,14 +5,17 @@ import os
 from players import AI, Human, CleverAI, GeniusAI
 from board import Board
 
-def main():
-    board = Board()
+def main(prepop_board=None):
+    if prepop_board:
+        board = Board(prepop_board)
+    else:
+        board = Board()
     p1 = Human('O')
-    p2 = CleverAI('X')
+    p2 = Human('X')
     players = [p1, p2]
     current_player = 0
     while not (board.is_full() or board.get_winner()):
-        os.system('clear')
+        #os.system('clear')
         print board
         print
         player = players[current_player]
@@ -36,5 +39,9 @@ def main():
         print 'A draw!'
 
 if __name__ == '__main__':
-    main()
+    # show the diagonals created by filling each cell with a coord
+    width, height = 7, 6
+    main(
+        [map(lambda n:str(i*10+n).zfill(2), range(height)) for i in range(width)]
+    )
 
